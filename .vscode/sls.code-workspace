@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "name": "@@service",
+      "path": "../packages/service"
+    },
+    {
+      "name": "@@resources",
+      "path": "../packages/resources"
+    },
+  ],
+  "settings": {
+    "typescript.tsdk": "@@service/node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true
+  }
+}
