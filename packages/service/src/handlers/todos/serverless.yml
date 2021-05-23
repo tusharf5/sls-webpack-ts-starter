@@ -1,4 +1,4 @@
-getEmailContent:
+get-email-content:
   handler: src/handlers/todos/get-todos.main
   events:
     - http:

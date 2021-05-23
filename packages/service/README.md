@@ -19,7 +19,7 @@ their values during build time. These variables are defined in the `webpack.conf
 To spin up a local dev server that will more closely match the API Gateway endpoint/experience:
 
 ```bash
-yarn serve
+yarn serve:watch
 ```
 
 ### Adding new functions/files to Webpack
@@ -30,28 +30,13 @@ file which is uses to automatically resolve your function handlers to the approp
 
 ```yaml
 functions:
-  hello:
+  hello-world:
     handler: src/hello.default
 ```
 
 As you can see, the path to the file with the function has to explicitly say where the handler
 file is. (If your function weren't the default export of that file, you'd do something like:
 `src/hello.namedExport` instead.)
-
-### Pruning old versions of deployed functions
-
-The Serverless framework doesn't purge previous versions of functions from AWS, so the number of previous versions can grow out of hand and eventually filling up your code storage. This starter kit includes [serverless-prune-plugin](https://github.com/claygregory/serverless-prune-plugin) which automatically prunes old versions from AWS. The config for this plugin can be found in `serverless.yml` file. The defaults are:
-
-```yaml
-custom:
-  prune:
-    automatic: true
-    number: 5 # Number of versions to keep
-```
-
-The above config removes all but the last five stale versions automatically after each deployment.
-
-Go [here](https://medium.com/fluidity/the-dark-side-of-aws-lambda-5c9f620b7dd2) for more on why pruning is useful.
 
 ## Code Structuring
 
@@ -65,65 +50,17 @@ type(scope1, scope2): message
 
 Commit Types.
 
-```json
-{
-  "feat": {
-    "description": "A new feature",
-    "title": "Features",
-    "emoji": "✨"
-  },
-  "fix": {
-    "description": "A bug fix",
-    "title": "Bug Fixes",
-    "emoji": "🐛"
-  },
-  "docs": {
-    "description": "Documentation only changes",
-    "title": "Documentation",
-    "emoji": "📚"
-  },
-  "style": {
-    "description": "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
-    "title": "Styles",
-    "emoji": "💎"
-  },
-  "refactor": {
-    "description": "A code change that neither fixes a bug nor adds a feature",
-    "title": "Code Refactoring",
-    "emoji": "📦"
-  },
-  "perf": {
-    "description": "A code change that improves performance",
-    "title": "Performance Improvements",
-    "emoji": "🚀"
-  },
-  "test": {
-    "description": "Adding missing tests or correcting existing tests",
-    "title": "Tests",
-    "emoji": "🚨"
-  },
-  "build": {
-    "description": "Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)",
-    "title": "Builds",
-    "emoji": "🛠"
-  },
-  "ci": {
-    "description": "Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)",
-    "title": "Continuous Integrations",
-    "emoji": "⚙️"
-  },
-  "chore": {
-    "description": "Other changes that don't modify src or test files",
-    "title": "Chores",
-    "emoji": "♻️"
-  },
-  "revert": {
-    "description": "Reverts a previous commit",
-    "title": "Reverts",
-    "emoji": "🗑"
-  }
-}
-```
+- **feat** (_Features_) ✨ - A new feature
+- **fix** (_Bug Fixes_) 🐛 - A bug fix
+- **docs** (_Documentation_) 📚 - Documentation only changes
+- **style** (_Styles_) 💎 - Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- **refactor** (_Code Refactoring_) 📦 - A code change that neither fixes a bug nor adds a feature
+- **perf** (_Performance Improvements_) 🚀 - A code change that improves performance
+- **test** (_Tests_) 🚨 - Adding missing tests or correcting existing tests
+- **build** (_Builds_) 🛠 - Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci** (_Continuous Integrations_) ⚙️ - Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+- **chore** (_Chores_) ♻️ - Other changes that don't modify src or test files
+- **revert** (_Reverts_) 🗑 - Reverts a previous commit
 
 Examples.
 
@@ -270,3 +207,14 @@ Since the project uses typescript so we don't provide full jsdoc comment attribu
  */
 function toString() {}
 ```
+
+### Serverless
+
+Lambda functions are always typed in kebab-case. Ex. `get-content`.
+
+Environment variables are always types in Upper Case. Ex. `NODE_ENV`.
+
+Environment variables are always scoped locally to functions even if it is duplicated across many. This means
+Environment variables are not defined globally in the `environment` field.
+
+API gateway paths are always defined by using the `_` keyword instead of `-`. Ex. `/api/get_email`.

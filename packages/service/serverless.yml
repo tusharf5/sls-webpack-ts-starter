@@ -14,7 +14,7 @@ provider:
   stage: ${opt:stage, "local"}
   region: ${opt:region, "us-east-1"}
   iam: ${file(./serverless.iam.yml)}
-    
+
 custom:
   serverless-offline-ssm:
     stages:
@@ -26,15 +26,6 @@ custom:
     webpackConfig: ./webpack.config.js
     includeModules: true
     packager: 'yarn' # Packager that will be used to package your external modules
-  warmup:
-    enabled: true
-    events:
-      - schedule: rate(5 minutes)
-    prewarm: true
-    concurrency: 1
-  prune:
-    automatic: true
-    number: 5 # Number of versions to keep
   ssmVars: ${file(./serverless.ssm.yml):ssmVars}
 
 functions:
@@ -44,4 +35,3 @@ plugins:
   - serverless-webpack
   - serverless-offline-ssm
   - serverless-offline
-  - serverless-prune-plugin
