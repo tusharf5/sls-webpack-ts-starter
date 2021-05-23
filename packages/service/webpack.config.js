@@ -7,6 +7,7 @@ const { DefinePlugin } = require('webpack');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const slsw = require('serverless-webpack');
 
@@ -20,6 +21,11 @@ module.exports = {
   optimization: {
     minimize: !slsw.lib.webpack.isLocal,
     mangleExports: !slsw.lib.webpack.isLocal,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+    ],
   },
   externalsPresets: { node: true },
   target: 'node',
@@ -44,6 +50,9 @@ module.exports = {
     new CleanWebpackPlugin(),
     new DefinePlugin({
       GLOBAL_VAR_SERVICE_NAME: JSON.stringify(slsw.lib.serverless.service.service),
+      GLOBAL_VAR_NODE_ENV: JSON.stringify(slsw.lib.options.stage || 'local'),
+      GLOBAL_VAR_SLS_STAGE: JSON.stringify(slsw.lib.options.stage || 'local'),
+      GLOBAL_VAR_REGION: JSON.stringify(slsw.lib.options.region || 'local'),
     }),
   ],
 };

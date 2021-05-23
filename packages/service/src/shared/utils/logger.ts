@@ -17,7 +17,7 @@ function log(
       date: new Date().toISOString(),
       component: component,
       service: GLOBAL_VAR_SERVICE_NAME,
-      env: process.env.NODE_ENV || 'local',
+      env: GLOBAL_VAR_NODE_ENV,
     })
   );
 }

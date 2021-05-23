@@ -2,9 +2,7 @@ import type { Todos } from 'local-ts';
 
 import { S3, PutObjectCommand } from '@aws-sdk/client-s3';
 
-import { COMMON_GLOBALS } from '@@shared/utils/constants';
-
-const s3Client = new S3({ region: COMMON_GLOBALS.region });
+const s3Client = new S3({ region: GLOBAL_VAR_REGION });
 
 /**
  * Saves user's details to S3

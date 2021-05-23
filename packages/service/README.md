@@ -9,6 +9,11 @@ yarn install
 
 ## Development
 
+### Global Variables
+
+Webpack adds some global variables to the project and it replaces all the usage of varaibles starting from `GLOBAL_VAR_*` with
+their values during build time. These variables are defined in the `webpack.config.js`.
+
 ### API Gateway-like local dev server
 
 To spin up a local dev server that will more closely match the API Gateway endpoint/experience:
