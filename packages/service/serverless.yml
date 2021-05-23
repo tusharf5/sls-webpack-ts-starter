@@ -4,21 +4,22 @@ package:
   individually: true
 
 frameworkVersion: '=2.43.0'
+variablesResolutionMode: 20210326
+configValidationMode: error
 
 provider:
   lambdaHashingVersion: 20201221
   name: aws
   runtime: nodejs14.x
-
-  iam:
-    role:
-      statements:
-        - Effect: 'Allow'
-          Action:
-            - 'lambda:InvokeFunction'
-          Resource: '*'
-
+  stage: ${opt:stage, "local"}
+  region: ${opt:region, "us-east-1"}
+  iam: ${file(./serverless.iam.yml)}
+    
 custom:
+  serverless-offline-ssm:
+    stages:
+      - local
+    ssm: ${file(./serverless.ssm.yml):ssmVarsOffline}
   serverless-offline:
     noPrependStageInUrl: true
   webpack:
@@ -34,16 +35,13 @@ custom:
   prune:
     automatic: true
     number: 5 # Number of versions to keep
+  ssmVars: ${file(./serverless.ssm.yml):ssmVars}
 
 functions:
-  emailGetEmailContent:
-    handler: src/handlers/todos/get-todos.main
-    events:
-      - http:
-          path: /todos
-          method: get
+  - ${file(./src/handlers/todos/serverless.yml)}
 
 plugins:
   - serverless-webpack
+  - serverless-offline-ssm
   - serverless-offline
   - serverless-prune-plugin

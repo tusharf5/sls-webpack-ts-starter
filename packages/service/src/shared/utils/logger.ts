@@ -9,6 +9,7 @@ function log(
   component: Utils.LogComponents = 'missing',
   meta: Utils.LogMeta = {}
 ): void {
+  // eslint-disable-next-line no-console
   console.log(
     JSON.stringify({
       level,

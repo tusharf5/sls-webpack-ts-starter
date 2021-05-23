@@ -1,0 +1,8 @@
+getEmailContent:
+  handler: src/handlers/todos/get-todos.main
+  events:
+    - http:
+        path: /todos
+        method: get
+  environment:
+    USER_CACHE_BUCKET: ${self:custom.ssmVars.service_db_endpoint}

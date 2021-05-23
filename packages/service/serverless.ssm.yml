@@ -1,0 +1,5 @@
+ssmVarsOffline:
+  '/path/to/service/my-param': 'sample-value-goes-here'
+
+ssmVars:
+  service_db_endpoint: 'fix-plugin-ssm-offline'

@@ -7,6 +7,7 @@
   },
   "plugins": ["jsdoc"],
   "rules": {
+    "no-console": "error",
     "valid-jsdoc": "off",
     "jsdoc/require-description": "error",
     "jsdoc/require-jsdoc": "error",
