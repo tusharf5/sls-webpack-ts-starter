@@ -4,7 +4,8 @@ package:
   individually: true
 
 frameworkVersion: '=2.43.0'
-variablesResolutionMode: 20210326
+# Todo submit a PR to serverless-offline-ssm to add support for new variable resolution mode
+# variablesResolutionMode: 20210326
 configValidationMode: error
 
 provider:

@@ -31,7 +31,11 @@ function isValidTodoRequest(payload: unknown): payload is Todos.GetTodosParams {
 }
 
 export const main: APIGatewayProxyHandler = async (event) => {
-  logger.debug('get-todos', 'A debug log', { data: 'Hello' });
+  logger.debug('get-todos', 'A debug log', {
+    data: {
+      userCacheBucket: LOCAL_ENV_VARIABLES.userCacheBucket,
+    },
+  });
 
   if (!isValidTodoRequest(event.body)) {
     return {

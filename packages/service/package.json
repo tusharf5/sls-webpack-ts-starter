@@ -1,7 +1,11 @@
 {
   "name": "serverless-webpack-starter",
   "version": "0.0.1",
-  "private": true,
+  "author": {
+    "name": "Tushar Sharma",
+    "url": "https://github.com/tusharf5"
+  },
+  "license": "MIT",
   "engines": {
     "node": ">=14.17 <15",
     "yarn": ">=1.22.0 <2"

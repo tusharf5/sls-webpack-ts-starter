@@ -1,6 +1,6 @@
 # serverless-webpack-typescript-starte
 
-An opinionated monorepo setup template for a serverless framework application that uses webpack & typescript to write the application.
+An opinionated monorepo setup template for a serverless framework application that uses webpack 5 & typescript 4.
 
 ## Directory Structure
 
