@@ -1,5 +1,8 @@
 import { Utils } from 'local-ts';
 
+/**
+ * Logs the parameters to the console
+ */
 function log(
   level: Utils.LogLevels,
   message: string,

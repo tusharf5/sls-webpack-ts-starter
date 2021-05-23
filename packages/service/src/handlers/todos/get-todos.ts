@@ -19,9 +19,14 @@ const LOCAL_ENV_VARIABLES = {
  * Validates the request payload
  */
 function isValidTodoRequest(payload: unknown): payload is Todos.GetTodosParams {
-  if (typeof (payload as Todos.GetTodosParams).email === 'string') {
+  if (!payload) {
+    return false;
+  }
+
+  if ((payload as Todos.GetTodosParams).email) {
     return true;
   }
+
   return false;
 }
 

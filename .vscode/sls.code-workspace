@@ -1,6 +1,10 @@
 {
   "folders": [
     {
+      "name": "@@root",
+      "path": "./"
+    },
+    {
       "name": "@@service",
       "path": "../packages/service"
     },
@@ -11,6 +15,6 @@
   ],
   "settings": {
     "typescript.tsdk": "@@service/node_modules/typescript/lib",
-    "typescript.enablePromptUseWorkspaceTsdk": true
+    "typescript.enablePromptUseWorkspaceTsdk": true,
   }
 }

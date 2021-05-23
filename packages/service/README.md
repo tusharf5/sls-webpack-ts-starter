@@ -50,6 +50,85 @@ Go [here](https://medium.com/fluidity/the-dark-side-of-aws-lambda-5c9f620b7dd2) 
 
 ## Code Structuring
 
+### Commits
+
+Commit format.
+
+```shell
+type(scope1, scope2): message
+```
+
+Commit Types.
+
+```json
+{
+  "feat": {
+    "description": "A new feature",
+    "title": "Features",
+    "emoji": "✨"
+  },
+  "fix": {
+    "description": "A bug fix",
+    "title": "Bug Fixes",
+    "emoji": "🐛"
+  },
+  "docs": {
+    "description": "Documentation only changes",
+    "title": "Documentation",
+    "emoji": "📚"
+  },
+  "style": {
+    "description": "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
+    "title": "Styles",
+    "emoji": "💎"
+  },
+  "refactor": {
+    "description": "A code change that neither fixes a bug nor adds a feature",
+    "title": "Code Refactoring",
+    "emoji": "📦"
+  },
+  "perf": {
+    "description": "A code change that improves performance",
+    "title": "Performance Improvements",
+    "emoji": "🚀"
+  },
+  "test": {
+    "description": "Adding missing tests or correcting existing tests",
+    "title": "Tests",
+    "emoji": "🚨"
+  },
+  "build": {
+    "description": "Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)",
+    "title": "Builds",
+    "emoji": "🛠"
+  },
+  "ci": {
+    "description": "Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)",
+    "title": "Continuous Integrations",
+    "emoji": "⚙️"
+  },
+  "chore": {
+    "description": "Other changes that don't modify src or test files",
+    "title": "Chores",
+    "emoji": "♻️"
+  },
+  "revert": {
+    "description": "Reverts a previous commit",
+    "title": "Reverts",
+    "emoji": "🗑"
+  }
+}
+```
+
+Examples.
+
+```shell
+git commit -m "feat(service, todos): Add delete todo api endpoint
+git commit -m "fix(service, user): Remove deprecated field from user interface
+git commit -m "feat(resources, sns): Add SNS topic for sending user events
+git commit -m "fix(resources, lambda): Restrict IAM policies for dynamodb
+```
+
 ### Logging
 
 You can import logger from any file by adding the following line.
@@ -58,15 +137,15 @@ You can import logger from any file by adding the following line.
 import { logger } from '@@shared/utils/logger';
 
 // You have the following methods available to use from logger.
-logger.debug('A debug log.');
-logger.info('Your message here.');
-logger.http('Your message here.');
-logger.error('Your message here.');
-logger.warn('Your message here.');
-logger.crit('Your message here.');
+logger.debug('get-todo', 'A debug log.');
+logger.info('delete-todo', 'Your message here.');
+logger.http('todo-cleanup-cron', 'Your message here.');
+logger.error('delete-todo', 'Your message here.');
+logger.warn('get-todo', 'Your message here.');
+logger.crit('update-todo', 'Your message here.');
 
 // To add json output with your messages, use folliwing
-logger.debug('Your message here.', { info: YOUR_JSON_OBJECT });
+logger.debug('todo-cleanup-cron', 'Your message here.', { data: YOUR_JSON_OBJECT });
 ```
 
 ### Import
@@ -184,7 +263,5 @@ Since the project uses typescript so we don't provide full jsdoc comment attribu
 /**
  * Converts an object to a string
  */
-function toString() {
-
-}
+function toString() {}
 ```

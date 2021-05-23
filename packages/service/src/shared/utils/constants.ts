@@ -1,3 +1,3 @@
 export const COMMON_GLOBALS = {
-  region: process.env.region,
+  region: process.env.region || 'local',
 };
